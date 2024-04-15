@@ -3,7 +3,13 @@
 
 ## ☔ Digital Rain
 
+## Demo
+Demo Video: <https://youtu.be/C5WglUmk2DU>
 
+## GitHub Repository
+GitHub Repo: <https://github.com/sgm180005/Finalproject_rain_sgm.git>
+
+## Description
 
 The Matrix series of science fiction action films are about a dystopian future where humans are unknowingly trapped in a simulated reality designed by machines to distract them while their real bodies are being used as an energy resource. 😱
 
