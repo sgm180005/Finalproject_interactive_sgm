@@ -1,66 +1,116 @@
-def choices(question):
-    print("\n" + question)
-    choice = input("Enter Your Choice [1/2/3/4]: ")
-    while(True):
-        if choice in ['1', '2', '3', '4']:
-            return choice
-        else:
-            print("Invalid choice. Enter again")
-            choice = input("Enter Choice [1/2/3/4]: ")
-
-def play_round(pick):
-    # TODO: Implement code & docstring
-    if pick == "1":
-            return 1
-    elif pick == "2":
-            return 2
-    elif pick == "3":
-            return 3 
-    else:
-         return 4    
-
 def play_game():
-    # TODO: Implement code & docstring
-   
+    """
+    Simulate the initial scenario and prompt the player to make a choice.
+
+    Returns:
+        str: The player's choice.
+    """
     print("You stare out across a vast space of black. There is no sound, there is no people, there is nothing.")
-    print(f"1. [Call out]")
-    print(f"2. [Stand there in silence]")
-    print(f"3. [Attempt to get out of the void]")
+    print("1. [Call out]")
+    print("2. [Stand there in silence]")
+    print("3. [Attempt to get out of the void]")
     pick = input("How would you like to respond?: ")
+    if pick == '1':
+        print("As you stand in the void, your voice echoes faintly, dissipating into the empty expanse. The silence weighs heavy, almost tangible. You try to discern any signs of life or direction but find nothing. It's as if you're suspended in an abyss, disconnected from everything familiar.")
+        return '1'  
+    elif pick == '2':
+        print("...")
+        return '3'  # Return '3' for scenario 2
+    elif pick == '3':
+        print("You start running faster in faster into the dark abyss, but it feels like you’re running through mud. Even if you were making progress getting out of this void, you’d have nothing to show for it.")
+        return '1'and'2'  # Return '2' for both scenarios 1 and 3
     print("{Suddenly, a square pops up in the void.}")
-    round1 = play_round(pick)
+    return pick
+
+def round_1():
+    pick = play_game()
     print(f"1. [Attack the square]")
     print(f"2. [Stare at the square]")
     print(f"3. [Hug the square]")
     print(f"4. [Run away from the square]")
     pick = input("How would you like to respond?: ")
+    if pick == '1':
+        print("When you swing your fist toward the square it starts glowing an angry red. 'I beg your finest pardon! Treat me with some respect mortal!'")
+        return '2' and '4'
+    elif pick == '2':
+        print("The square seems to be observing you as well. A small hum of power is emanating from the geometric shape as it turns a shade of purple.")
+        return '1' and '3'
+    elif pick == '3':
+        print("The square seems to hum with power as you embrace the shape. Its body starts to turn a light shade of pink.")
+        return '1' and '3'
+    elif pick == '4':
+        print("Goosebumps rise on the back of your neck as the square seems to loom over you. As you run away from the mysterious object it seems to follow you gliding easily in the void as you struggle to get away.")
+        return '2'
     print("I am the God of your world. You have reached the end of your previous life and now it's time to place you in another world.")
-    round2 = play_round(pick)
-    print(f"1. [Question the square]")
-    print(f"2. [Thank the square]")
+    return pick
+
+def round_2():
+    pick = play_game()
+    print(f"1. [Question how you died in your previous life]")
+    print(f"2. [Thank the square for granting you a new lease on life]")
     print(f"3. [Defy the square]")
     pick = input("How would you like to respond?: ")
-    round3 = play_round(pick)
-    p1_score = (round1 == 1) + (round2 == 1) + (round3 == 1)
-    p2_score = (round1 == 2) + (round2 == 2) + (round3 == 2)
-    
-    if p1_score > p2_score:
-        return 1
-    elif p1_score < p2_score:
-        return 2
-    else:
-        return 0
+    if pick == '1':
+        print("While crossing the street, a delivery truck crashed into you.")
+        print("[W-what?! That was how I died?]")
+        print(f"1. [Acceptance/Resignation]")
+        print(f"2. [Anger]")
+        print(f"3. [Regret/Bargaining]")
+        print(f"4. [Shock]")
+        pick = input("How would you like to respond?: ")
+        if pick == '1':
+            print("You adjust quite quickly don't you?")
+            return '1' and '3'
+        elif pick == '2':
+            print("A reasonable response to your untimely end.")
+            return '1' and '2'
+        elif pick == '3':
+            print("There's nothing you can do now. Your body is no longer available to host your soul.")
+            return '2' and '4'
+        elif pick == '4':
+            print("A reasonable response to your untimely end.")
+            return '3'
+        return '4'
+    elif pick == '2':
+        print("Well, it was kind of my fault that your life was cut to an end so soon. The square pauses before continuing on...")
+        return '3'
+    elif pick == '3':
+        print("Such insolence for a being that’s about to send you to another world.")
+        print(f"1. [Apologize]")
+        print(f"2. [Remain Defiant]")
+        print(f"3. [Stay Silent]")
+        if pick == '1':
+            return '1' and '3'
+        elif pick == '2':
+            return '2' and '4'
+        elif pick == '3':
+            return '4'
+        return '1' and '2'
+    print ("Now, you must answer these three questions before I send you down to live your next life.")
+    return pick 
+
+def round_3():
+    pick = play_game()
+
 
 def main():
-    result = play_game()
-    if result == 1:
-        print(f"Ending 1")
-    elif result == 2:
-         print(f"Ending 2")
-    elif result == 3:
-        print(f"Ending 3")
+    ending_counts = {'1': 0, '2': 0, '3': 0, '4': 0}
+
+    result = round_1()
+    ending_counts[result] += 1
+
+    result = round_2()
+    ending_counts[result] += 1
+
+    majority_ending = max(ending_counts, key=ending_counts.get)    
+    if majority_ending == '1':
+        print("ENDING 1: PROTAGONIST")
+    elif majority_ending == '2':
+        print("ENDING 2: VILLAIN")
+    elif majority_ending == '3':
+        print("ENDING 3: SIDE CHARACTER")
     else:
-         print(f"Ending 4")
+        print("SECRET ENDING: GOD")
 
 if __name__ == "__main__":
     main()
